@@ -1,0 +1,53 @@
+dns:
+  enable: true
+  enhanced-mode: fake-ip
+  nameserver:
+    - 114.114.114.114
+  fake-ip-filter:
+    - "dns.msftncsi.com"
+    - "www.msftncsi.com"
+    - "www.msftconnecttest.com"
+# interface-name: WLAN # 出口网卡名称，或者使用下方的自动检测
+tun:
+  enable: true
+  stack: gvisor # 使用 system 需要 Clash Premium 2021.05.08 及更高版本
+  dns-hijack:
+    - 198.18.0.2:53 # 请勿更改
+  auto-route: true
+  auto-detect-interface: true # 自动检测出口网卡
+
+
+
+#注意：配置文件打开路径是配置--edit即可
+另外目前暂时是先安装tun，即servise mod，再在配置--edit配置文件
+#system 使用内核的 tcpip 协议栈 在理论上行为与系统的 tcpip 最接近 兼容性最强
+
+但是需要给 clash 的 core 打开防火墙 才能正常工作
+
+设置 - 更新和安全 - Windows 安全中心 - 防火墙和网络保护 - 允许应用通过防火墙 - clash-win64.exe - 专用/公用 都点上
+mixin: 
+  dns:
+    enable: true
+    enhanced-mode: redir-host
+    nameserver:
+    - 1.1.1.1 # 真实请求DNS，可多设置几个
+    - https://doh.dns.sb/dns-query
+    - https://dns.adguard.com/dns-query
+    - https://cdn-doh.ssnm.xyz/dns-query
+    - 119.29.29.29 #腾讯
+    - 223.5.5.5 #阿里
+  # interface-name: en0 # 出口网卡名称，或者使用下方的自动检测
+  tun:
+    enable: true
+    stack: gvisor
+    dns-hijack:
+    - 198.18.0.2:53
+    macOS-auto-route: true
+    macOS-auto-detect-interface: true # 自动检测出口网卡
+
+
+配置文件路径如下：
+setting --profile maxin -- yaml --edit
+注意：需要关闭clash for window ，下次重新启动需要在点开后点击restart，再点开maxin的开关
+注意：电脑关机然后开机，只需打开cfw即可自己启动tun模式。
+另外，如果同时开启热点，则以太网显示无法链接，关闭热点后，退出cfw，则正常链接。
