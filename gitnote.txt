@@ -1,0 +1,132 @@
+github常见错误fatal: remote origin already exists.
+2020-04-20阅读 2810
+如果输入$ git remote add origin git@github.com:Ted-Wnag（github帐号名）/learngit（项目名）.git 
+
+提示出错信息：fatal: remote origin already exists.
+
+解决办法如下：
+
+1、先输入$ git remote rm origin
+
+2、再输入$ git remote add origin git@github.com:Ted-Wnag/learngit.git 就不会报错了！
+
+
+
+3、如果输入$ git remote rm origin 还是报错的话
+
+error: Could not remove config section 'remote.origin'. 我们需要修改gitconfig文件的内容
+
+4、找到你的github的安装路径，我的是C:\Users\Administrator\AppData\Local\GitHub\PortableGit_ca477551eeb4aea0e4ae9fcd3358bd920bb5c8\etc
+
+5、找到一个名为gitconfig的文件，打开它把里面的[remote "origin"]那一行删掉就好了！
+执行指令将文件添加到本地仓库：
+
+    $ git add .         //添加当前文件夹下的所有文件
+    $ git add **.cpp    //添加当前文件夹下的**.cpp这个文件
+
+git status
+
+git add .
+
+git commit -m “备注”
+
+git push
+
+git log查看所有改变
+ git log --author="YuXinLolita"
+查看该作者所改动的记录，支持中文
+可简写成 git log --author="YuXin"或一个字母"y"
+全局信息
+ git config --global --lsit
+
+git rm //命令行删除文件	
+ git  mv  filename newfilename //重命名文件
+gt mv filename flodername //移动到该文件夹
+git mv filename flodername/ newFileName // 移动到该文件夹并且重命名
+
+git log 后出现冒号“：” 无法退出，按q可以退出
+git log --pretty=oneline filename
+复制id，
+git show id //则显示详细信息
+git checkout -- filename//回到上一次修改的内容
+撤销追踪
+git reset HEAD filename
+
+回到指定版本
+git reset --hard id
+or git reset --hard HEAD^//一个^表示回到上一次版本
+将某一文件回退到指定版本，即将指定版本的文件回退到指定文件内
+git checkout id -- filename //注，-- 与文件名之间有一个空格
+添加标签
+git tag tagname //默认是最后一次，即最新一次
+git tag tagname commitid
+git push origin tagname //推送标签
+创建分支
+git branch branchname
+git branch -d branchname // 删除分支
+git checkout branchname //切换分支
+切换、删除分支
+{
+① git branch dev  //创建dev分支
+
+② git branch         //查看分支
+
+③ git checkout dev     // 切换到dev分支
+
+④ git branch -d test  //删除test分支，不能删除目前所在的分支
+
+⑤ git checkout -b test  //创建并跳转到test分支
+
+⑥ 当分支有提交代码时，使用④删除分支删除不了，需要把 -d 变成-D，强制删除。
+}//这个是别人的笔记	
+合并代码用merge
+git merge branchname
+合并有冲突的代码
+1，git merge --abort //保留当前分支内容
+之后手动删除三角等特殊符号
+2，git commit
+按src按键，在输入:wq,则退出
+然后完成
+其他人查看
+git log --oneline //查看修改记录简写的心思
+git log --oneline --graph //查看修改记录的详细信息
+1、git fetch 拉取所有的远程仓库。
+
+2、git branch  -av 查看分支
+
+3、删除分支前确认两点，第一，该分支是否真的确实不需要。第二该分支是否已经合并到主分支上了。经以上两点确认要删除的话，执行命令：git push origin --delete summer
+
+
+合并另外一个开发者提交的代码  git merge origin/test //这个不太会	
+1.先克隆
+
+ git clone link branchname
+
+git  add .
+
+git commit -m ""
+
+2、配置本地项目的第二个用户
+
+git config --add --local user.name 'xiaomu' //注，--user.name 与文件名之间有一个空格
+
+git config --add --local user.email  'xiaomu@qq.com'
+
+查看配置新用户是否成功，git config  --local --list
+
+3、查看本地分支与远程分支的关联关系
+//注，--先，git fetch
+
+git branch -av    (红色部分代表远端的分支)
+
+4、创建并检出一个分支，并切换到test分支，并且test分支与远端分支建立的关联。git checkout -b test remotes/origin/test
+
+5、git push ,提交到远端
+
+6、git fetch 拉取远端分支
+
+7、//复制的别人的笔记    //这个不太会	
+github 插件 
+1，octoterr
+2，gitzip for github
+3,enhanced github
